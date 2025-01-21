@@ -1,0 +1,15 @@
+[project]
+name = "dailbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.6",
+    "httpx>=0.28.1",
+    "langchain>=0.3.15",
+    "pydantic-settings>=2.7.1",
+    "ruff>=0.9.2",
+    "twilio>=9.4.3",
+    "uvicorn>=0.34.0",
+]
