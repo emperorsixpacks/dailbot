@@ -16,6 +16,6 @@ class BaseConfig(BaseSettings):
 
 
 class AppSettings(BaseConfig):
-    Debug: bool = Field(default=True)
-    Port: int = Field(default=8000)
-    Host: str = Field(default="127.0.0.1")
+    debug: bool = Field(default=True)
+    port: int = Field(default=5000)
+    host: str = Field(default="localhost")
