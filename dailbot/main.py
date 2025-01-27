@@ -1,12 +1,5 @@
 import os
-<<<<<<< HEAD
 from hashlib import new
-=======
-
-from dotenv import load_dotenv
-from fastapi import FastAPI
-from twilio.rest import Client
->>>>>>> 9fbfc03 (feat: added tailwind and daisycss)
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
@@ -17,15 +10,11 @@ from starlette.middleware.cors import CORSMiddleware
 from twilio.rest import Client
 from twilio.rest.conversations.v1.configuration import webhook
 
-<<<<<<< HEAD
 from dailbot.settings import AirtableSettings, AppSettings, TailwindSettings
 from dailbot.utils import create_new_webhook, read_webhook, write_webhook
 
 load_dotenv(".env")
-=======
-load_dotenv(".env")
 
->>>>>>> 9fbfc03 (feat: added tailwind and daisycss)
 app_settings = AppSettings()
 twilio_settings = TailwindSettings()
 airtable_settings = AirtableSettings()
@@ -55,12 +44,12 @@ if new_webhook is not None:
 DEFAULT_WEBHOOK = read_webhook()
 
 
-
 @app.post("/webhook", response_model=None)
 async def airtable_notification(request: Request):
     await request.body()
     await request.headers
     return 200
+
 
 TWILIO_SSID = os.getenv("TWILIO_SSID", None)
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", None)
