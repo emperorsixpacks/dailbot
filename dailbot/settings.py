@@ -26,9 +26,13 @@ class AppSettings(BaseConfig):
     host: str = Field(default="localhost")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public_url: str
 =======
 >>>>>>> 5997272 (feat: added settings)
+=======
+    public_url: str
+>>>>>>> 8134ec3 (mod: added check in webhook creation)
 
 
 class TailwindSettings(BaseConfig):
@@ -40,8 +44,12 @@ class TailwindSettings(BaseConfig):
 class AirtableSettings(BaseConfig):
     airtable_access_token: str
 <<<<<<< HEAD
+<<<<<<< HEAD
     airtable_base_id: str
 =======
 >>>>>>> 9fbfc03 (feat: added tailwind and daisycss)
 =======
 >>>>>>> 5997272 (feat: added settings)
+=======
+    airtable_base_id: str
+>>>>>>> 8134ec3 (mod: added check in webhook creation)

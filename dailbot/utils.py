@@ -60,4 +60,3 @@ def read_webhook() -> CreateWebhookResponse:
 def verify_signature(webhook_secret, payload, received_signature):
     computed_signature = hmac.new(webhook_secret, payload, hashlib.sha256).hexdigest()
     return hmac.compare_digest(computed_signature, received_signature)
-
