@@ -3,8 +3,12 @@ node_modules/
 .venv/
 .env
 <<<<<<< HEAD
+<<<<<<< HEAD
 secrete.txt
 webhook.json
 =======
 
 >>>>>>> 9fbfc03 (feat: added tailwind and daisycss)
+=======
+secrete.txt
+>>>>>>> f951976 (feat: added read and write to file)

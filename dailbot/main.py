@@ -47,7 +47,6 @@ async def airtable_notification(request: Request):
     return 200
 
 
-
 if __name__ == "__main__":
     import uvicorn
 
