@@ -1,4 +1,5 @@
 import os
+from hashlib import new
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
@@ -10,7 +11,7 @@ from twilio.rest import Client
 from twilio.rest.conversations.v1.configuration import webhook
 
 from dailbot.settings import AirtableSettings, AppSettings, TailwindSettings
-from dailbot.utils import create_new_webhook, read_secret, write_secret
+from dailbot.utils import create_new_webhook, read_webhook, write_webhook
 
 load_dotenv(".env")
 app_settings = AppSettings()
@@ -34,14 +35,19 @@ middlewares = [
     ),
 ]
 
-# res, new_webhook = create_new_webhook(airtable_api, WEBHOOK_URL)
+new_webhook = create_new_webhook(airtable_api, WEBHOOK_URL)
 
-app = FastAPI(middleware=middlewares)
+if new_webhook is not None:
+    write_webhook(new_webhook)
+
+DEFAULT_WEBHOOK = read_webhook()
+
 
 
 @app.post("/webhook", response_model=None)
 async def airtable_notification(request: Request):
     await request.body()
+    await request.headers
     return 200
 
 

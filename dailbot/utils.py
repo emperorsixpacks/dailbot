@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import json
 import os
 from typing import TYPE_CHECKING, Optional
 
+from pyairtable.models.webhook import CreateWebhookResponse
+
 if TYPE_CHECKING:
     from pyairtable.api import Base
-    from pyairtable.models.webhook import CreateWebhookResponse
 
 
 def return_app_dir():
@@ -30,7 +32,8 @@ def create_new_webhook(
                 "filters": {
                     "dataTypes": ["tableData"],
                     "recordChangeScope": "tblZbNhBmDblSUXR1",
-                    "changeTypes": ["create", "update", "delete"],
+                    "changeTypes": ["add", "remove", "update"],
+                    "fromSources": ["formSubmission"],
                 }
             }
         },
@@ -38,20 +41,22 @@ def create_new_webhook(
     return res
 
 
-def write_secret(secret: str):
-    with open(os.path.join(BASE_DIR, "secret.txt"), "w") as file:
-        file.write(secret)
+def write_webhook(data: CreateWebhookResponse):
+    with open(os.path.join(BASE_DIR, "webhook.json"), "w") as file:
+        dict_data = data.model_dump()
+        dict_data["expiration_time"] = str(dict_data["expiration_time"])
+        json.dump(dict_data, file)
         file.close()
 
-def read_secret() -> str:
-    with open(os.path.join(BASE_DIR, "secret.txt"), "r") as file:
-        data = file.read()
+
+def read_webhook() -> CreateWebhookResponse:
+    with open(os.path.join(BASE_DIR, "webhook.json"), "r") as file:
+        json_data = json.load(file)
         file.close()
-        return data
+        json_data = CreateWebhookResponse(**json_data)
+        return json_data
 
 
-def verify_signature(payload, received_signature):
-    computed_signature = hmac.new(
-        whatsapp_config.whatsapp_token.encode(), payload, hashlib.sha256
-    ).hexdigest()
+def verify_signature(webhook_secret, payload, received_signature):
+    computed_signature = hmac.new(webhook_secret, payload, hashlib.sha256).hexdigest()
     return hmac.compare_digest(computed_signature, received_signature)
