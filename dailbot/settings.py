@@ -1,5 +1,10 @@
 from pydantic.fields import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from twilio.base.client_base import os
+
+from dailbot.utils import BASE_DIR
+
+env_dir = os.path.join(BASE_DIR, ".env")
 
 
 class BaseConfig(BaseSettings):
@@ -11,7 +16,7 @@ class BaseConfig(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_file=("../.env.prod", "../.env"), env_file_encoding="utf-8", extra="ignore"
+        env_file=(env_dir), env_file_encoding="utf-8", extra="ignore"
     )
 
 
@@ -19,3 +24,13 @@ class AppSettings(BaseConfig):
     debug: bool = Field(default=True)
     port: int = Field(default=5000)
     host: str = Field(default="localhost")
+
+
+class TailwindSettings(BaseConfig):
+    twilio_ssid: str
+    twilio_auth_token: str
+    twilio_phone_number: str
+
+
+class AirtableSettings(BaseConfig):
+    airtable_access_token: str

@@ -4,18 +4,15 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from twilio.rest import Client
 
-from dailbot.settings import AppSettings
+from dailbot.settings import AirtableSettings, AppSettings, TailwindSettings
 
 load_dotenv(".env")
 
 app_settings = AppSettings()
 app = FastAPI()
 
-TWILIO_SSID = os.getenv("TWILIO_SSID", None)
-TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", None)
-TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER", None)
-
-twilio_client = Client(TWILIO_SSID, TWILIO_AUTH_TOKEN)
+twilio_settings = TailwindSettings()
+airtable_settings = AirtableSettings()
 
 if __name__ == "__main__":
     import uvicorn
