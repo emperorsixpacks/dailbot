@@ -24,6 +24,7 @@ class AppSettings(BaseConfig):
     debug: bool = Field(default=True)
     port: int = Field(default=5000)
     host: str = Field(default="localhost")
+    public_url: str
 
 
 class TailwindSettings(BaseConfig):
@@ -34,3 +35,4 @@ class TailwindSettings(BaseConfig):
 
 class AirtableSettings(BaseConfig):
     airtable_access_token: str
+    airtable_base_id: str
