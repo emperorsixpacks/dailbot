@@ -24,6 +24,7 @@ class AppSettings(BaseConfig):
     debug: bool = Field(default=True)
     port: int = Field(default=5000)
     host: str = Field(default="localhost")
+<<<<<<< HEAD
     public_url: str
 
 
@@ -36,3 +37,5 @@ class TailwindSettings(BaseConfig):
 class AirtableSettings(BaseConfig):
     airtable_access_token: str
     airtable_base_id: str
+=======
+>>>>>>> 9fbfc03 (feat: added tailwind and daisycss)
